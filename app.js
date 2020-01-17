@@ -1,3 +1,5 @@
+// The project must generate a `team.html` page in the `output` directory
+
 const Employee = require("./lib/Employee");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
@@ -7,6 +9,11 @@ const inquirer = require("inquirer");
 
 inquirer
     .prompt([
+        {
+            type: "input",
+            message: "Name: ",
+            name: "name"
+        },
         {
             type: "input",
             message: "What is your Email?",
@@ -23,53 +30,28 @@ inquirer
             name: "role",
             choices: ["Engineer", "Manager", "Intern"]
         },
+        {
+            type: "input",
+            message: "Where do you go to school?",
+            name: "school",
+            when: (answers) => answers.role === "Intern"
+        },
+        {
+            type: "input",
+            message: "What is your GitHub username?",
+            name: "github",
+            when: (answers) => answers.role === "Engineer"
+        },
+        {
+            type: "input",
+            message: "What is your office room number?",
+            name: "office",
+            when: (answers) => answers.role === "Manager"
+        }
     ])
     .then(function(response){
-        console.log(response.role);
+        console.log(response);
 
-        if(response.role === Intern){
-            inquirer 
-                .prompt ([
-                    {
-                        type: "input",
-                        message: "Where do you go to school?",
-                        name: "school"
-                    },
-                    
-                ])
-                .then(function(internRes){
-                    console.log(internRes);
-                    
-                })
-        } 
-        else if (response.role === Engineer){
-            inquirer
-                .prompt ([
-                    {
-                        type: "input",
-                        message: "What is your GitHub username?",
-                        name: "github"
-                    },
-                ])
-                .then(function(engineerRes){
-                    console.log(engineerRes);
-                    
-                })
-        } 
-        else {
-            inquirer
-                .prompt ([
-                    {
-                        type: "input",
-                        message: "What is your office room number?",
-                        name: "office"
-                    }
-                ])
-                .then(function(managerRes){
-                    console.log(managerRes);
-                    
-                })
-        }
     });
         
         
