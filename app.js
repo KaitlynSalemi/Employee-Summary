@@ -7,6 +7,8 @@ const Manager = require("./lib/Manager");
 
 const inquirer = require("inquirer");
 
+// dunderscore
+
 inquirer
     .prompt([
         {
