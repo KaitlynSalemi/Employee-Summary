@@ -14,7 +14,7 @@ function generateHTML(){
     </head>
     <body>
         <nav class="navbar navbar-light bg-light">
-            <span class="navbar-brand mb-0 h1">Navbar</span>
+            <span class="navbar-brand mb-0 h1">Team Profile</span>
         </nav>
         <div class="container">
             <div class="row">`

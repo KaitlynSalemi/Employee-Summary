@@ -2,14 +2,14 @@ const Employee = require("./lib/Employee");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
-// const startHTML = require("./templets/Start.html");
-// const managerHTML = require("./templets/Manager.html");
-// const engineerHTML = require("./templets/Engineer.html");
-// const internHTML = require("./templets/Inter.html");
-// const endHTML = require("./templets/End.html");
+const generateHTML = require("./generateHTML");
+const generateManager = require("./generateManager");
+const generateEngineer = require("./generateEngineer");
+const generateIntern = require("./generateIntern");
+const generateEnd = require("./generateEnd");
 
 const inquirer = require("inquirer");
-var fs = require("fs");
+const fs = require("fs");
 
 managerInfo();
 
@@ -37,7 +37,20 @@ function managerInfo(){
             name: "office",
         },
     ])
-    .then(function(res){
+    .then(function(response){
+        // console.log(response);
+        const employee = new Employee(response.name, response.id, response.email, response.role);
+
+        fs.writeFile("team.html", generateHTML(employee),function(err){
+            if(err) throw err;
+        })
+
+        const manager = new Manager(response.name, response.id, response.email, response.office)
+
+        fs.appendFile("team.html", generateManager(manager),function(err){
+            if(err) throw err;
+        })
+
         whatNext();
     })
 }
@@ -62,7 +75,7 @@ function whatNext(){
                 break;
         
                 case "I have no more team members to add":
-                generateHTML();
+                generateFinal();
                 break;
             }
         })
@@ -92,8 +105,14 @@ function engineerQs(){
                 name: "github"
             }
         ])
-        .then(function(res){
-            console.log(res);
+        .then(function(response){
+            // console.log(response);
+            const engineer = new Engineer(response.engineerName, response.engineerId, response.engineerEmail, response.github)
+
+            fs.appendFile("team.html", generateEngineer(engineer),function(err){
+                if(err) throw err;
+            });
+
             whatNext();
         })
 }
@@ -122,47 +141,58 @@ function internQs(){
                 name: "school"
             }
         ])
-        .then(function(res){
-            console.log(res);
+        .then(function(response){
+            // console.log(response);
+            const intern = new Intern (response.internName, response.internId, response.internEmail, response.school)
+
+            fs.appendFile("team.html", generateIntern(intern),function(err){
+                if(err) throw err;
+            });
+
             whatNext();
         })
 }
 
-
-    const employee = new Employee(response.name, response.id, response.email, response.role);
-    const engineer = new Engineer(response.engineerName, response.engineerId, response.engineerEmail, response.github)
-    const intern = new Intern (response.internName, response.internId, response.internEmail, response.school)
-    const manager = new Manager(response.name, response.id, response.email, response.office)
-    // console.log(employee)
-    // console.log(engineer)
-    // console.log(intern)
-    // console.log(manager)
-    
-    fs.writeFile("team.html", generateHTML(employee),function(err){
-        if(err) throw err;
-        console.log("success");
-    })
-            
-    // if (response.role === "Engineer"){
-        fs.appendFile("team.html", generateEngineer(engineer),function(err){
-            if(err) throw err;
-            console.log("success");
-        })
-    // } else if (response.role === "Intern"){
-        fs.appendFile("team.html", generateIntern(intern),function(err){
-            if(err) throw err;
-            console.log("success");
-        })
-    // } else {
-        fs.appendFile("team.html", generateManager(manager),function(err){
-            if(err) throw err;
-            console.log("success");
-        })
-    // }
-    
+function generateFinal() {
     fs.appendFile("team.html", generateEnd(), function(err){
         if(err) throw err;
-        console.log("success");
+        console.log("Your Team Profile is Complete!");
+    });
+}
+
+
+    // const employee = new Employee(response.name, response.id, response.email, response.role);
+    // const engineer = new Engineer(response.engineerName, response.engineerId, response.engineerEmail, response.github)
+    // const intern = new Intern (response.internName, response.internId, response.internEmail, response.school)
+    // const manager = new Manager(response.name, response.id, response.email, response.office)
+    // // console.log(employee)
+    // // console.log(engineer)
+    // // console.log(intern)
+    // // console.log(manager)
+    
+    // fs.writeFile("team.html", generateHTML(employee),function(err){
+    //     if(err) throw err;
+    //     console.log("success");
+    // })
+            
+    // fs.appendFile("team.html", generateEngineer(engineer),function(err){
+    //     if(err) throw err;
+    //     console.log("success");
+    // })
+
+    // fs.appendFile("team.html", generateIntern(intern),function(err){
+    //     if(err) throw err;
+    //     console.log("success");
+    // })
+
+    // fs.appendFile("team.html", generateManager(manager),function(err){
+    //     if(err) throw err;
+    //     console.log("success");
+    // })
+
+    // fs.appendFile("team.html", generateEnd(), function(err){
+    //     if(err) throw err;
+    //     console.log("success");
         
-    })
+    // })
         
