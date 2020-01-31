@@ -1,4 +1,4 @@
-function generateHTML(){
+function generateHTML(response){
     const $html = 
     `<!DOCTYPE html>
     <html lang="en">
@@ -17,7 +17,20 @@ function generateHTML(){
             <span class="navbar-brand mb-0 h1">Team Profile</span>
         </nav>
         <div class="container">
-            <div class="row">`
+            <div class="row">
+                <div class="col s12 m6 l4">
+                    <div class="card bg-light mb-3" style="max-width: 18rem;">
+                        <div class="card-header">${ response.name }</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Manager</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Email: ${ response.email } </li>
+                                <li class="list-group-item">id: ${ response.id } </li>
+                                <li class="list-group-item">Office Number: ${ response.officeNumber } </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>`
     return $html;
 
 }

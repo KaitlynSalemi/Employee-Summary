@@ -39,17 +39,18 @@ function managerInfo(){
     ])
     .then(function(response){
         // console.log(response);
-        const employee = new Employee(response.name, response.id, response.email, response.role);
+        // const employee = new Employee(response.name, response.id, response.email, response.role);
 
-        fs.writeFile("team.html", generateHTML(employee),function(err){
+        const manager = new Manager(response.name, response.id, response.email, response.office);
+
+        fs.writeFile("team.html", generateHTML(manager),function(err){
             if(err) throw err;
         })
 
-        const manager = new Manager(response.name, response.id, response.email, response.office)
 
-        fs.appendFile("team.html", generateManager(manager),function(err){
-            if(err) throw err;
-        })
+        // fs.appendFile("team.html", generateManager(manager),function(err){
+        //     if(err) throw err;
+        // })
 
         whatNext();
     })
@@ -97,7 +98,7 @@ function engineerQs(){
             {
                 type: "input",
                 message: "What is their id number?",
-                name: "engineerid"
+                name: "engineerId"
             },
             {
                 type: "input",
@@ -161,38 +162,4 @@ function generateFinal() {
 }
 
 
-    // const employee = new Employee(response.name, response.id, response.email, response.role);
-    // const engineer = new Engineer(response.engineerName, response.engineerId, response.engineerEmail, response.github)
-    // const intern = new Intern (response.internName, response.internId, response.internEmail, response.school)
-    // const manager = new Manager(response.name, response.id, response.email, response.office)
-    // // console.log(employee)
-    // // console.log(engineer)
-    // // console.log(intern)
-    // // console.log(manager)
-    
-    // fs.writeFile("team.html", generateHTML(employee),function(err){
-    //     if(err) throw err;
-    //     console.log("success");
-    // })
-            
-    // fs.appendFile("team.html", generateEngineer(engineer),function(err){
-    //     if(err) throw err;
-    //     console.log("success");
-    // })
-
-    // fs.appendFile("team.html", generateIntern(intern),function(err){
-    //     if(err) throw err;
-    //     console.log("success");
-    // })
-
-    // fs.appendFile("team.html", generateManager(manager),function(err){
-    //     if(err) throw err;
-    //     console.log("success");
-    // })
-
-    // fs.appendFile("team.html", generateEnd(), function(err){
-    //     if(err) throw err;
-    //     console.log("success");
-        
-    // })
         

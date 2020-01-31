@@ -19,7 +19,7 @@ When the Manager chooses Engineer they are asked about the Engineer's name, emai
 
 ![Image of 2/5](./images/ScreenShot2.png)
 
-When the Manager chooses INtern they are asked about the Intern's name, email, id number, and school name.
+When the Manager chooses Intern they are asked about the Intern's name, email, id number, and school name.
 
 ![Image of 3/5](./images/ScreenShot3.png)
 
